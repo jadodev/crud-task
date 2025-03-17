@@ -27,19 +27,24 @@ export class TaskServiceApplication {
         return taskMapper;
     }
 
-    async updateTask(id: number, taskDTO: TaskDTO): Promise<TaskDTO>{
-        const task = await this.taskServiceDomain.getById(id);
-        const updateTask = TaskMapper.toDomain(taskDTO);
-
-        updateTask.setTitle(task.getTitle());
-        updateTask.setState(task.getState());
-        updateTask.setUpdateAt(task.getUpdateAt());
-
+    async updateTask(id: number, taskDTO: TaskDTO): Promise<TaskDTO> {      
+        const existingTask = await this.taskServiceDomain.getById(id);
+      
+        const updatedTaskDTO = new TaskDTO(
+          existingTask.getId(), 
+          taskDTO.getTitle(),  
+          taskDTO.getState(), 
+          existingTask.getCreateAt(),
+          new Date() 
+        );
+            
+        const updateTask = TaskMapper.toDomain(updatedTaskDTO);
         const saved = await this.taskServiceDomain.updateTask(id, updateTask);
+      
         return TaskMapper.toDto(saved);
-    }
+      }
 
     async delete(id: number): Promise<void>{
         this.taskServiceDomain.deleteTask(id);
     }
-}
+} 

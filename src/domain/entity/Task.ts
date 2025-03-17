@@ -7,16 +7,13 @@ export class Task {
    private createAt: Date;
    private updateAt: Date;
 
-   constructor(title: string, state: TaskState, createAt: Date, updateAt: Date){
+   constructor(title: string, state: TaskState){
     this.title = title;
     this.state = state;
-    this.createAt = createAt;
-    this.updateAt = updateAt;
+    this.createAt = new Date();
+    this.updateAt = new Date();
    }
 
-   public setId(id: number): void {
-    this.id = id;
-  }
 
   public getId(): number {
     return this.id;
@@ -38,19 +35,15 @@ export class Task {
     return this.state;
   }
 
-  public setCreateAt(createAt: Date): void {
-    this.createAt = createAt;
-  }
-
   public getCreateAt(): Date {
     return this.createAt;
   }
 
-  public setUpdateAt(updateAt: Date): void {
-    this.updateAt = updateAt;
-  }
-
   public getUpdateAt(): Date {
     return this.updateAt;
+  }
+
+  public updateTimestamps(): void {
+    this.updateAt = new Date();
   }
 }

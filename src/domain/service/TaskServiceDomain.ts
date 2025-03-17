@@ -13,12 +13,13 @@ export class TaskServiceDomain implements TaskInterfacePortIn{
     ){};
 
     async create(task: Task): Promise<Task> {
-        try {
-            return await this.repository.save(task);
-          } catch (error) {
-            throw TaskExceptionHandler.creationError();
-          }
-    };
+      try {
+        const newTask = new Task(task.getTitle(), task.getState());
+        return await this.repository.save(newTask);
+      } catch (error) {
+        throw TaskExceptionHandler.creationError();
+      }
+  }
 
     async getAllTask(): Promise<Task[]> {
         try{
@@ -37,12 +38,18 @@ export class TaskServiceDomain implements TaskInterfacePortIn{
     };
 
     async updateTask(id: number, task: Task): Promise<Task> {
-        try{
-            return this.repository.updateTask(id, task);
-        } catch(error){
-            throw TaskExceptionHandler.updateError();
+        try {
+          const existingTask = await this.repository.getById(id);
+          if (!existingTask) {
+            throw TaskExceptionHandler.notFound();
+          }
+    
+          task.updateTimestamps();
+          return this.repository.updateTask(id, task);
+        } catch (error) {
+          throw TaskExceptionHandler.updateError();
         }
-    };
+      }
 
     async deleteTask(id: number): Promise<void> {
         try{
