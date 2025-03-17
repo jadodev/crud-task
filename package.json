@@ -60,16 +60,23 @@
     "typescript-eslint": "^8.20.0"
   },
   "jest": {
-  "preset": "ts-jest",
-  "testEnvironment": "node",
-  "rootDir": ".",
-  "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.ts$",
-  "moduleDirectories": ["node_modules", "src"],
-  "collectCoverage": true,
-  "coverageDirectory": "coverage",
-  "coverageReporters": ["text", "lcov"],
-  "moduleNameMapper": {
-    "^src/(.*)$": "<rootDir>/src/$1"
-  }
-}
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "rootDir": ".",
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.ts$",
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
+    "collectCoverage": true,
+    "coverageDirectory": "coverage",
+    "coverageReporters": [
+      "text",
+      "lcov"
+    ],
+    "moduleNameMapper": {
+      "^src/(.*)$": "<rootDir>/src/$1"
+    }
+  },
+  "packageManager": "pnpm@10.6.4+sha512.da3d715bfd22a9a105e6e8088cfc7826699332ded60c423b14ec613a185f1602206702ff0fe4c438cb15c979081ce4cb02568e364b15174503a63c7a8e2a5f6c"
 }

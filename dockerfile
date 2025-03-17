@@ -1,23 +1,21 @@
-# Usa una imagen oficial de Node.js
-FROM node:20-alpine
+# Usa una imagen de Node.js con PNPM habilitado
+FROM node:20
 
-# Instala PNPM globalmente
-RUN corepack enable && corepack prepare pnpm@latest --activate
-
-# Establece el directorio de trabajo
+# Configura el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copia los archivos de dependencias
+# Copia los archivos necesarios para instalar dependencias
 COPY package.json pnpm-lock.yaml ./
 
-# Instala solo dependencias de producción
-RUN pnpm install --prod
+# Habilita Corepack para usar PNPM
+RUN corepack enable \
+  && pnpm install --frozen-lockfile
 
-# Copia el resto del código de la aplicación
+# Copia el resto del código
 COPY . .
 
-# Expone el puerto (ajusta si usas otro)
+# Expone el puerto en el que corre la app NestJS
 EXPOSE 3000
 
-# Comando para ejecutar la aplicación
-CMD ["pnpm", "start:prod"]
+# Comando para iniciar la aplicación
+CMD ["pnpm", "start"]
