@@ -1,0 +1,6 @@
+export enum TaskState {
+    PENDING ='PENDIENTE',
+    IN_PROCESS = 'EN_PROCESO',
+    COMPLETED = 'COMPLETADA',
+    CANCELED = 'CANCELADA'
+}
