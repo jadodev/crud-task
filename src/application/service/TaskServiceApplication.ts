@@ -26,15 +26,20 @@ export class TaskServiceApplication {
 
     async getAlls(): Promise<TaskDTO[]> {
         const cachedTasks = await this.cacheManager.get<TaskDTO[]>('tasks_all');
+        
         if (cachedTasks) {
+            console.log('🟢 Datos obtenidos desde el caché:', cachedTasks);
             return cachedTasks;
         }
-
+    
+        console.log('⚠️ No hay datos en caché. Consultando la BD...');
+        
         const tasks = await this.taskServiceDomain.getAllTask();
         const mappedTasks = tasks.map(TaskMapper.toDto);
         
         await this.cacheManager.set('tasks_all', mappedTasks, 300);
-
+        console.log('✅ Datos almacenados en caché:', mappedTasks);
+    
         return mappedTasks;
     }
 

@@ -1,3 +1,5 @@
+import { CACHE_MANAGER } from "@nestjs/cache-manager";
+import { Cache } from 'cache-manager';
 import { Body, Controller, Delete, Get, Inject, Param, Post, Put } from "@nestjs/common";
 import { plainToInstance } from "class-transformer";
 import { TaskDTO } from "src/application/DTO/TaskDTO";
@@ -7,6 +9,7 @@ import { TaskExceptionHandler } from "src/exceptions/ExceptionHandler";
 @Controller("task")
 export class TaskController {
     constructor(
+      @Inject(CACHE_MANAGER) private cacheManager: Cache,
         private readonly taskService: TaskServiceApplication
     ){};
 
@@ -18,6 +21,12 @@ export class TaskController {
         } catch (error) {
             throw TaskExceptionHandler.creationError();
         }
+    }
+
+    @Get('set')
+    async setCache() {
+        await this.cacheManager.set('test_key', 'Hola desde NestJS', 300);
+        return { message: 'Clave almacenada en caché' };
     }
 
     @Get()

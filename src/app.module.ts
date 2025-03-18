@@ -25,7 +25,7 @@ import * as redisStore from 'cache-manager-redis-store';
       store: redisStore, 
       host: 'redis',
       port: 6379,
-      ttl: 300, 
+      ttl: 60, 
       isGlobal: true, 
     }),
   ],
