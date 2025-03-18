@@ -1,21 +1,18 @@
-# Usa una imagen de Node.js con PNPM habilitado
-FROM node:20
+# Usa una imagen de Node.js
+FROM node:20-alpine
 
-# Configura el directorio de trabajo dentro del contenedor
+# Establecer directorio de trabajo
 WORKDIR /app
 
-# Copia los archivos necesarios para instalar dependencias
-COPY package.json pnpm-lock.yaml ./
+# Copiar package.json y lockfile
+COPY package.json package-lock.json ./
+RUN npm install --omit=dev --legacy-peer-deps
 
-# Habilita Corepack para usar PNPM
-RUN corepack enable \
-  && pnpm install --frozen-lockfile
-
-# Copia el resto del código
+# Copiar el resto del código
 COPY . .
 
-# Expone el puerto en el que corre la app NestJS
+# Exponer el puerto
 EXPOSE 3000
 
-# Comando para iniciar la aplicación
-CMD ["pnpm", "start"]
+# Comando de inicio
+CMD ["npm", "start"]
