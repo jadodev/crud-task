@@ -89,20 +89,24 @@ Crear una Tarea (POST /tasks)
 PENDIENTE, EN_PROCESO, COMPLETADA, CANCELADA
 
 - Ejemplo de solicitud POST:
-
+```bash
 {
   "title": "Nueva Tarea",
   "state": "PENDIENTE"
 }
+```
 
 - Actualizar una Tarea (PUT /tasks/:id)
 Recibe el id de la tarea como parámetro en la URL y un objeto JSON con los campos a actualizar.
 
 Ejemplo de solicitud:
+
+```bash
 {
   "title": "Tarea Actualizada",
   "state": "EN_PROCESO"
 }
+```
 
 - Eliminar una Tarea (DELETE /tasks/:id)
 Recibe el id de la tarea como parámetro en la URL y elimina la tarea correspondiente.
