@@ -5,6 +5,8 @@ import { TaskController } from './infrastructure/controller/TaskController';
 import { TaskServiceApplication } from './application/service/TaskServiceApplication';
 import { TaskServiceDomain } from './domain/service/TaskServiceDomain';
 import { TaskRepository } from './infrastructure/repository/TaskRepository';
+import { CacheModule } from '@nestjs/cache-manager';
+import * as redisStore from 'cache-manager-redis-store';
 
 @Module({
   imports: [
@@ -18,7 +20,14 @@ import { TaskRepository } from './infrastructure/repository/TaskRepository';
       entities: [TaskEntity],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([TaskEntity])
+    TypeOrmModule.forFeature([TaskEntity]),
+    CacheModule.register({
+      store: redisStore, 
+      host: 'redis',
+      port: 6379,
+      ttl: 300, 
+      isGlobal: true, 
+    }),
   ],
   controllers: [TaskController],
   providers: [TaskServiceApplication,
