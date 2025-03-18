@@ -1,18 +1,20 @@
 # Usa una imagen de Node.js
 FROM node:20-alpine
 
-# Establecer directorio de trabajo
+# Establece el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copiar package.json y lockfile
-COPY package.json package-lock.json ./
-RUN npm install --omit=dev --legacy-peer-deps
-
-# Copiar el resto del código
+# Copia los archivos del proyecto al contenedor
 COPY . .
 
-# Exponer el puerto
+# Instala las dependencias
+RUN npm install
+
+# Instala el CLI de NestJS globalmente
+RUN npm install -g @nestjs/cli
+
+# Expón el puerto donde la app correrá
 EXPOSE 3000
 
-# Comando de inicio
-CMD ["npm", "start"]
+# Comando para iniciar la aplicación
+CMD ["npm", "run", "start"]
