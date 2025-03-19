@@ -121,10 +121,31 @@ Devuelve un listado de todas las tareas almacenadas.
 Si se intenta acceder a una ruta no válida, la API devuelve un objeto de error con el mensaje Ruta no encontrada.
 Si se intenta crear una tarea con un estado no válido, la API devuelve un error indicando los estados permitidos.
 
+## End Points para peticiones:
 
+- GET:
+```bash
+  http://alb-1-1267904391.us-east-1.elb.amazonaws.com/task
+```
 
+- GET/ID:
+```bash
+    http://alb-1-1267904391.us-east-1.elb.amazonaws.com/task/{id}
+```
 
+- POST:
+```bash
+    http://alb-1-1267904391.us-east-1.elb.amazonaws.com/task
+```
 
+- PUT:
+```bash
+    http://alb-1-1267904391.us-east-1.elb.amazonaws.com/task/{id}
+```
+- DELETE:
+```bash
+    http://alb-1-1267904391.us-east-1.elb.amazonaws.com/task/{id}
+```
 
 
 
