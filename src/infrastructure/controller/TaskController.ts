@@ -13,6 +13,11 @@ export class TaskController {
         private readonly taskService: TaskServiceApplication
     ){};
 
+    @Get('/health')
+    healthCheck() {
+      return { status: 'ok' };
+    }
+
     @Post()
     async create(@Body() taskDto: any): Promise<TaskDTO>{
         try {
