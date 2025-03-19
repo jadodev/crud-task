@@ -146,11 +146,9 @@ Si se intenta crear una tarea con un estado no válido, la API devuelve un error
 ```bash
     http://alb-1-1267904391.us-east-1.elb.amazonaws.com/task/{id}
 ```
+## Coverage de pruebas.
 
-
-
-
-
+![Descripción de la imagen](src/assets/coverage.png)
 
 
 
