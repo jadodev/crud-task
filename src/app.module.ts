@@ -12,11 +12,11 @@ import * as redisStore from 'cache-manager-redis-store';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'database-2.c8day8ku2lr4.us-east-1.rds.amazonaws.com',
+      host: 'database-1.c8day8ku2lr4.us-east-1.rds.amazonaws.com',
       port: 5432,
       username: 'postgres',
       password: 'LagosDeMarol',
-      database: 'database-2',
+      database: 'postgres',
       entities: [TaskEntity],
       synchronize: true,
     }),
